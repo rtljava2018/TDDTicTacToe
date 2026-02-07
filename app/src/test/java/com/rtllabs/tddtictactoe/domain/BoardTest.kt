@@ -43,6 +43,17 @@ class BoardTest {
 
     }
 
+    @Test
+    fun setCellShouldNotPlacePlayersExistingCellReturnFalse() {
+        val board = Board()
+
+        board.setCells(0,0,Player.X)
+        val isPlaced=board.setCells(0,0,Player.O)
+
+        assertFalse(isPlaced)
+
+    }
+
 
 
 

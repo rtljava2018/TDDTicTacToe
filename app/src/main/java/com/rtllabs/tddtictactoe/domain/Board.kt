@@ -14,6 +14,7 @@ class Board {
     }
 
     fun setCells(row: Int, col: Int, x: Player): Boolean {
+        if (cells[row][col] != null) return false
         cells[row][col] = x
         return true
     }
