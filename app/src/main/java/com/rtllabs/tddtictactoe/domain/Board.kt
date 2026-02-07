@@ -13,7 +13,8 @@ class Board {
         return cells.all { row -> row.all { cell -> cell != null } }
     }
 
-    fun setCells(row: Int, col: Int, x: Player) {
+    fun setCells(row: Int, col: Int, x: Player): Boolean {
         cells[row][col] = x
+        return true
     }
 }

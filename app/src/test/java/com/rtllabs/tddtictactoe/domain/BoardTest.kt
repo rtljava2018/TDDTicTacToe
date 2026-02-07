@@ -33,6 +33,16 @@ class BoardTest {
 
     }
 
+    @Test
+    fun setCellShouldPlacePlayersInEmptyCellReturnTrue() {
+        val board = Board()
+
+        val success=board.setCells(0,0,Player.X)
+
+        assertTrue(success)
+
+    }
+
 
 
 
