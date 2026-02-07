@@ -54,6 +54,17 @@ class BoardTest {
 
     }
 
+    @Test
+    fun getCellShouldReturnPlayerInExistingCell() {
+        val board = Board()
+
+        board.setCells(0,0,Player.X)
+        val player=board.getCell(0,0)
+
+        assertEquals(Player.X,player)
+
+    }
+
 
 
 

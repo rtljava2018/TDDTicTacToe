@@ -18,4 +18,9 @@ class Board {
         cells[row][col] = x
         return true
     }
+
+    fun getCell(row: Int, col: Int): Player? {
+        return cells[row][col]
+    }
+
 }
