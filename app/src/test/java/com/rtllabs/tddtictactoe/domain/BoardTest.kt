@@ -10,6 +10,5 @@ class BoardTest {
         val board = Board()
 
         assertTrue(board.isEmpty())
-
     }
 }
