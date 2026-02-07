@@ -8,4 +8,8 @@ class Board {
     fun isEmpty(): Boolean {
         return cells.all { row -> row.all { cell -> cell == null } }
     }
+
+    fun isBoardFull(): Boolean {
+        return cells.all { row -> row.all { cell -> cell != null } }
+    }
 }

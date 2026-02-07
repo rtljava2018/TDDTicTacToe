@@ -1,6 +1,6 @@
 package com.rtllabs.tddtictactoe.domain
 
-import org.junit.Assert.assertTrue
+import org.junit.Assert.*
 import org.junit.Test
 
 class BoardTest {
@@ -11,4 +11,17 @@ class BoardTest {
 
         assertTrue(board.isEmpty())
     }
+
+    @Test
+    fun gameNewBoardShouldIsFullReturnFalseInitially(){
+        val board = Board()
+
+        val isFull= board.isBoardFull()
+
+        assertFalse(isFull)
+
+    }
+
+
+
 }
