@@ -26,8 +26,10 @@ class BoardTest {
         }
 
         val isFull= board.isBoardFull()
+        val isEmpty= board.isEmpty()
 
         assertTrue(isFull)
+        assertFalse(isEmpty)
 
     }
 
