@@ -21,7 +21,7 @@ class BoardTest {
         val board = Board()
         for (i in 0 until 3){
             for (j in 0 until 3){
-                board.cells[i][j] = Player.X
+                board.setCells(i,j,Player.X)
             }
         }
 

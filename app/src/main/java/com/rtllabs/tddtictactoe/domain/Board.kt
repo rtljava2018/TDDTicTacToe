@@ -2,7 +2,7 @@ package com.rtllabs.tddtictactoe.domain
 
 class Board {
 
-    val cells: MutableList<MutableList<Player?>>
+    private val cells: MutableList<MutableList<Player?>>
                     = MutableList(3){ MutableList(3){ null} }
 
     fun isEmpty(): Boolean {
@@ -11,5 +11,9 @@ class Board {
 
     fun isBoardFull(): Boolean {
         return cells.all { row -> row.all { cell -> cell != null } }
+    }
+
+    fun setCells(row: Int, col: Int, x: Player) {
+        cells[row][col] = x
     }
 }
