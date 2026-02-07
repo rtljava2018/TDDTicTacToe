@@ -9,18 +9,14 @@ class BoardTest {
     fun gameNewBoardShouldHaveEmptyCells() {
         val board = Board()
 
-        assertTrue(board.isEmpty())
-    }
-
-    @Test
-    fun gameNewBoardShouldIsFullReturnFalseInitially(){
-        val board = Board()
-
+        val isEmpty=board.isEmpty()
         val isFull= board.isBoardFull()
 
+        assertTrue(isEmpty)
         assertFalse(isFull)
-
     }
+
+
 
 
 
