@@ -39,6 +39,10 @@ class TicTacToeGame {
         }
     }
 
+    fun isGameOver(): Boolean {
+        return winner != null || isDraw
+    }
+
 
     private fun checkWinner(): Player? {
         val cells = board.getAllCells()
