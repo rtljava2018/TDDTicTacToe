@@ -164,7 +164,7 @@ class GameTest {
         game.makeMove(2, 1)//X
         game.makeMove(2, 0)//O
         game.makeMove(2, 2)//X
-        val isDraw = game.isGameOver()
+        val isDraw = game.isDraw()
 
         assertTrue(isDraw)
     }
