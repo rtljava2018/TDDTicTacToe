@@ -7,4 +7,8 @@ class TicTacToeGame {
         return board
     }
 
+    fun getCurrentPlayer(): Player {
+        return Player.X
+    }
+
 }

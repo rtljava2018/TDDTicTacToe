@@ -12,4 +12,11 @@ class GameTest {
         assertTrue(board.isEmpty())
 
     }
+
+    @Test
+    fun gameShouldStartWithPlayerX() {
+        val game = TicTacToeGame()
+
+        assertEquals(Player.X, game.getCurrentPlayer())
+    }
 }
