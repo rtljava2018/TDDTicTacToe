@@ -79,6 +79,22 @@ class GameTest {
 
         assertFalse(isGameOver)
     }
+    @Test
+    fun makeMoveShouldNotAllowSwitchPlayerAfterGameOver() {
+        val game = TicTacToeGame()
+
+        game.makeMove(0, 0)//X
+        game.makeMove(1, 0)//O
+        game.makeMove(0, 1)//X
+        game.makeMove(1, 1)//O
+        game.makeMove(0, 2)//X
+        val isGameOver=game.makeMove(2, 2)//O
+
+        assertFalse(isGameOver)
+        assertEquals(Player.X, game.getCurrentPlayer())
+        assertNotEquals(Player.O, game.getCurrentPlayer())
+
+    }
 
     @Test
     fun checkWinnerShouldDetectRowWin() {

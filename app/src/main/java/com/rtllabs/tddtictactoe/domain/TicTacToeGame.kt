@@ -26,11 +26,14 @@ class TicTacToeGame {
     }
 
     fun makeMove(row: Int, col: Int): Boolean {
-        if (isGameOver()) return false
+        if (isGameOver()) {
+            return false
+        }
         val isMark=board.setCells(row, col, currentPlayer)
         evaluateGameState()
-        isGameOver()
-        switchPlayer()
+        if(!isGameOver()) {
+            switchPlayer()
+        }
         return isMark
     }
 
