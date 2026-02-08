@@ -34,6 +34,16 @@ class GameTest {
         assertFalse(game.isDraw())
     }
 
+    @Test
+    fun makeMoveShouldPlacePlayerInEmptyCell() {
+        val game = TicTacToeGame()
+
+        val isMark = game.makeMove(0, 0)
+
+        assertTrue(isMark)
+
+    }
+
 
 
 

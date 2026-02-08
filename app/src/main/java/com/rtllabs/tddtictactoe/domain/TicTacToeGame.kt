@@ -23,5 +23,10 @@ class TicTacToeGame {
         return isDraw
     }
 
+    fun makeMove(row: Int, col: Int): Boolean {
+        val isMark=board.setCells(row, col, currentPlayer)
+        return isMark
+    }
 
-}
+
+    }
