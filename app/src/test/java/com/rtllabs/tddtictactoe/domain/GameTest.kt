@@ -67,6 +67,20 @@ class GameTest {
     }
 
     @Test
+    fun makeMoveShouldNotAllowAfterGameOver() {
+        val game = TicTacToeGame()
+
+        game.makeMove(0, 0)//X
+        game.makeMove(1, 0)//O
+        game.makeMove(0, 1)//X
+        game.makeMove(1, 1)//O
+        game.makeMove(0, 2)//X
+        val isGameOver=game.makeMove(2, 2)
+
+        assertFalse(isGameOver)
+    }
+
+    @Test
     fun checkWinnerShouldDetectRowWin() {
         val game = TicTacToeGame()
         game.makeMove(0, 0)//X
@@ -168,6 +182,8 @@ class GameTest {
 
         assertTrue(isDraw)
     }
+
+
 
 
 }
