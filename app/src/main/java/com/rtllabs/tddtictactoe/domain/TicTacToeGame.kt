@@ -1,5 +1,7 @@
 package com.rtllabs.tddtictactoe.domain
 
+import kotlin.collections.get
+
 class TicTacToeGame {
     private val board = Board()
     private var currentPlayer = Player.X
@@ -37,6 +39,13 @@ class TicTacToeGame {
         for (i in 0..2) {
             if (cells[i][0] != null && cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) {
                 winner= cells[i][0]
+            }
+        }
+
+        //columns
+        for (j in 0..2) {
+            if (cells[0][j] != null && cells[0][j] == cells[1][j] && cells[1][j] == cells[2][j]) {
+                winner = cells[0][j]
             }
         }
     }

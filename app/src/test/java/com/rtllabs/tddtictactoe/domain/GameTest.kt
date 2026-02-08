@@ -79,5 +79,18 @@ class GameTest {
         assertEquals(Player.X, winner)
     }
 
+    @Test
+    fun checkWinnerShouldDetectColumnWin() {
+        val game = TicTacToeGame()
+        game.makeMove(0, 0)//X
+        game.makeMove(0, 1)//O
+        game.makeMove(1, 0)//X
+        game.makeMove(1, 1)//O
+        game.makeMove(2, 0)//X
+        val winner = game.getWinner()
+
+        assertEquals(Player.X, winner)
+    }
+
 
 }
