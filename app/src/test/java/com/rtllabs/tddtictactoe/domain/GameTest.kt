@@ -7,7 +7,7 @@ class GameTest {
     @Test
     fun gameShouldStartWithEmptyBoard(){
         val game = TicTacToeGame()
-        val board = game.board
+        val board = game.getBoard()
 
         assertTrue(board.isEmpty())
 

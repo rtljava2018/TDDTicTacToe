@@ -1,7 +1,10 @@
 package com.rtllabs.tddtictactoe.domain
 
 class TicTacToeGame {
-    val board = Board()
+    private val board = Board()
 
+    fun getBoard(): Board {
+        return board
+    }
 
 }
