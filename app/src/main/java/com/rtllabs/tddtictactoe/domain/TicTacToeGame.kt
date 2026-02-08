@@ -25,8 +25,20 @@ class TicTacToeGame {
 
     fun makeMove(row: Int, col: Int): Boolean {
         val isMark=board.setCells(row, col, currentPlayer)
+        checkWinner()
         switchPlayer()
         return isMark
+    }
+
+    private fun checkWinner() {
+        val cells = board.getAllCells()
+
+        //rows
+        for (i in 0..2) {
+            if (cells[i][0] != null && cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) {
+                winner= cells[i][0]
+            }
+        }
     }
 
     private fun switchPlayer() {
