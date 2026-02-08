@@ -27,10 +27,18 @@ class TicTacToeGame {
 
     fun makeMove(row: Int, col: Int): Boolean {
         val isMark=board.setCells(row, col, currentPlayer)
-        winner = checkWinner()
+        evaluateGameState()
         switchPlayer()
         return isMark
     }
+
+    private fun evaluateGameState() {
+        winner = checkWinner()
+        if (winner == null && board.isBoardFull()) {
+            isDraw = true
+        }
+    }
+
 
     private fun checkWinner(): Player? {
         val cells = board.getAllCells()
