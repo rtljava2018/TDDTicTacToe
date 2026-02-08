@@ -3,6 +3,7 @@ package com.rtllabs.tddtictactoe.domain
 class TicTacToeGame {
     private val board = Board()
     private var currentPlayer = Player.X
+    private var winner: Player? = null
 
 
     fun getBoard(): Board {
@@ -14,7 +15,7 @@ class TicTacToeGame {
     }
 
     fun getWinner(): Player? {
-        return null
+        return winner
     }
 
 }
