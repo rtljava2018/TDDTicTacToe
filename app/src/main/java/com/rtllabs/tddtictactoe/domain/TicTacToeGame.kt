@@ -1,6 +1,5 @@
 package com.rtllabs.tddtictactoe.domain
 
-import kotlin.collections.get
 
 class TicTacToeGame {
     private val board = Board()
