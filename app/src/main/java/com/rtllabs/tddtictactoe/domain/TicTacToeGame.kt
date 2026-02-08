@@ -25,8 +25,12 @@ class TicTacToeGame {
 
     fun makeMove(row: Int, col: Int): Boolean {
         val isMark=board.setCells(row, col, currentPlayer)
-        currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
+        switchPlayer()
         return isMark
+    }
+
+    private fun switchPlayer() {
+        currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
 
 
