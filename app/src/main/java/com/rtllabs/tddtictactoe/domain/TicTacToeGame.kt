@@ -18,4 +18,9 @@ class TicTacToeGame {
         return winner
     }
 
+    fun isDraw(): Boolean {
+        return false
+    }
+
+
 }

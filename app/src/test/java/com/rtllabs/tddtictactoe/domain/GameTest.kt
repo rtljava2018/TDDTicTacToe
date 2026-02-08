@@ -27,5 +27,14 @@ class GameTest {
         assertNull(game.getWinner())
     }
 
+    @Test
+    fun gameShouldNotBeDrawInitially() {
+        val game = TicTacToeGame()
+
+        assertFalse(game.isDraw())
+    }
+
+
+
 
 }
