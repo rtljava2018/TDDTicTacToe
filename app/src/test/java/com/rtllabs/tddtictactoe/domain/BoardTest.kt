@@ -63,4 +63,13 @@ class BoardTest {
         assertEquals(Player.X,player)
     }
 
+    @Test
+    fun getAllCellsShouldReturnAllCells() {
+
+        val cells= board.getAllCells()
+
+        assertEquals(3,cells.size)
+
+    }
+
 }

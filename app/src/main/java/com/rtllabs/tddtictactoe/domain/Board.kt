@@ -23,4 +23,8 @@ class Board {
         return cells[row][col]
     }
 
+    fun getAllCells() : List<List<Player?>> {
+        return cells.map { it.toList() }
+    }
+
 }
