@@ -4,6 +4,7 @@ class TicTacToeGame {
     private val board = Board()
     private var currentPlayer = Player.X
     private var winner: Player? = null
+    private var isDraw = false
 
 
     fun getBoard(): Board {
@@ -19,7 +20,7 @@ class TicTacToeGame {
     }
 
     fun isDraw(): Boolean {
-        return false
+        return isDraw
     }
 
 
