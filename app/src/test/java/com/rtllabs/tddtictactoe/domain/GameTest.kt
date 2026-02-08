@@ -105,5 +105,18 @@ class GameTest {
         assertEquals(Player.X, winner)
     }
 
+    @Test
+    fun checkWinnerShouldDetectOppositeDiagonalWin() {
+        val game = TicTacToeGame()
+        game.makeMove(2, 0)//X
+        game.makeMove(0, 1)//O
+        game.makeMove(1, 1)//X
+        game.makeMove(1, 0)//O
+        game.makeMove(0, 2)//X
+        val winner = game.getWinner()
+
+        assertEquals(Player.X, winner)
+    }
+
 
 }
