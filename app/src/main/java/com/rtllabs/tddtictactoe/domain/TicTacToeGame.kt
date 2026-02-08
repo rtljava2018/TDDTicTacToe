@@ -48,6 +48,11 @@ class TicTacToeGame {
                 winner = cells[0][j]
             }
         }
+
+        //diagonals
+        if (cells[0][0] != null && cells[0][0] == cells[1][1] && cells[1][1] == cells[2][2]) {
+            winner = cells[0][0]
+        }
     }
 
     private fun switchPlayer() {
