@@ -19,4 +19,13 @@ class GameTest {
 
         assertEquals(Player.X, game.getCurrentPlayer())
     }
+
+    @Test
+    fun gameShouldStartWithNoWinner() {
+        val game = TicTacToeGame()
+
+        assertNull(game.getWinner())
+    }
+
+
 }

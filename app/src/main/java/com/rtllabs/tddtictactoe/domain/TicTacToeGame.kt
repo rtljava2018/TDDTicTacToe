@@ -5,13 +5,16 @@ class TicTacToeGame {
     private var currentPlayer = Player.X
 
 
-
     fun getBoard(): Board {
         return board
     }
 
     fun getCurrentPlayer(): Player {
         return currentPlayer
+    }
+
+    fun getWinner(): Player? {
+        return null
     }
 
 }
