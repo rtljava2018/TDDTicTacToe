@@ -55,6 +55,17 @@ class GameTest {
 
     }
 
+    @Test
+    fun makeMoveShouldPlacePlayerAndAlternateTurnsToOtherPlayer() {
+        val game = TicTacToeGame()
+
+        val isMark = game.makeMove(0, 0)
+        val currentPlayer = game.getCurrentPlayer()
+
+        assertTrue(isMark)
+        assertEquals(Player.O, currentPlayer)
+    }
+
 
 
 
