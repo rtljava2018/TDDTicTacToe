@@ -45,7 +45,7 @@ class GameTest {
     }
 
     @Test
-    fun makeMoveShouldNotPlacePlayerInExistingCell() {
+    fun makeMoveShouldAllowPlacePlayerOccupiedCell() {
         val game = TicTacToeGame()
 
         game.makeMove(0, 0)
