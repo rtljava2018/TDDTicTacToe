@@ -28,4 +28,19 @@ class MakeMoveUseCaseTest {
         assertFalse(gameState1.isGameOver)
         assertEquals(Player.X, gameState2.currentPlayer)
     }
+
+    @Test
+    fun makeMoveUseCaseShouldNotAllowToMoveOnOccupiedCell(){
+
+        val gameState1=useCase(0,0)//X
+        val gameState2=useCase(0,0)//O
+
+        assertEquals(Player.X, gameState1.board[0][0])
+        assertEquals(Player.X, gameState2.board[0][0])
+        assertEquals(Player.O, gameState1.currentPlayer)
+        assertEquals(Player.O, gameState2.currentPlayer)
+        assertNull(gameState2.winner)
+        assertFalse(gameState2.isDraw)
+        assertFalse(gameState2.isGameOver)
+    }
 }
