@@ -33,6 +33,10 @@ lifecyclelivedata = "2.8.6"
 
 hilt = "2.58"
 hilt-navigation-compose = "1.1.0"
+mockk = "1.14.3"
+turbine = "1.2.0"
+kotlinxCoroutinesTest = "1.10.2"
+mockkAndroid = "1.14.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -77,6 +81,10 @@ lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-com
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
