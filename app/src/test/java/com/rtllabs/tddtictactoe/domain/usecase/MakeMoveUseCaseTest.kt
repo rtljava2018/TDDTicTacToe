@@ -1,0 +1,31 @@
+package com.rtllabs.tddtictactoe.domain.usecase
+
+import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGame
+import com.rtllabs.tddtictactoe.domain.entity.Player
+import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Test
+
+class MakeMoveUseCaseTest {
+    private lateinit var game: TicTacToeGame
+    private lateinit var useCase: MakeMoveUseCase
+
+    @Before
+    fun setup(){
+        game = TicTacToeGame()
+        useCase = MakeMoveUseCase(game)
+    }
+
+    @Test
+    fun makeMoveUseCaseShouldReactWithUpdatedGameState(){
+
+        val gameState1=useCase(0,0)//X
+        val gameState2=useCase(1,1)//O
+
+        assertEquals(Player.O, gameState1.currentPlayer)
+        assertNull(gameState1.winner)
+        assertFalse(gameState1.isDraw)
+        assertFalse(gameState1.isGameOver)
+        assertEquals(Player.X, gameState2.currentPlayer)
+    }
+}
