@@ -1,5 +1,8 @@
-package com.rtllabs.tddtictactoe.domain
+package com.rtllabs.tddtictactoe.domain.engine
 
+import com.rtllabs.tddtictactoe.domain.entity.Board
+import com.rtllabs.tddtictactoe.domain.entity.GameState
+import com.rtllabs.tddtictactoe.domain.entity.Player
 
 class TicTacToeGame {
     private val board = Board()
@@ -24,17 +27,17 @@ class TicTacToeGame {
         return isDraw
     }
 
-    fun makeMove(row: Int, col: Int): Boolean {
+    fun makeMove(row: Int, col: Int): GameState {
         if (isGameOver()) {
-            return false
+            return snapshot()
         }
         val isMark=board.setCells(row, col, currentPlayer)
-        if (!isMark) return false
+        if (!isMark) return snapshot()
         evaluateGameState()
         if(!isGameOver()) {
             switchPlayer()
         }
-        return true
+        return snapshot()
     }
 
     private fun evaluateGameState() {
@@ -79,6 +82,15 @@ class TicTacToeGame {
 
     private fun switchPlayer() {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
+    }
+
+    private fun snapshot(): GameState {
+        return GameState(
+            board = board.getAllCells().map { it.toList() },
+            currentPlayer = currentPlayer,
+            winner = winner,
+            isDraw = isDraw,
+            isGameOver = isGameOver() )
     }
 
 

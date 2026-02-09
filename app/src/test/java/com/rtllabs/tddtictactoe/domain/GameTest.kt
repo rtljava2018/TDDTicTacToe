@@ -1,5 +1,7 @@
 package com.rtllabs.tddtictactoe.domain
 
+import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGame
+import com.rtllabs.tddtictactoe.domain.entity.Player
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -38,9 +40,10 @@ class GameTest {
     fun makeMoveShouldPlacePlayerInEmptyCell() {
         val game = TicTacToeGame()
 
-        val isMark = game.makeMove(0, 0)
+        val gameState = game.makeMove(0, 0)
 
-        assertTrue(isMark)
+        assertTrue(gameState.board[0][0] == Player.X)
+        assertEquals(Player.X,gameState.board[0][0])
 
     }
 
@@ -49,9 +52,10 @@ class GameTest {
         val game = TicTacToeGame()
 
         game.makeMove(0, 0)
-        val isMark = game.makeMove(0, 0)
+        val gameState = game.makeMove(0, 0)
 
-        assertFalse(isMark)
+        assertFalse(gameState.board[0][0] == Player.O)
+        assertNotEquals(Player.O,gameState.board[0][0])
 
     }
 
@@ -59,10 +63,10 @@ class GameTest {
     fun makeMoveShouldPlacePlayerAndAlternateTurnsToOtherPlayer() {
         val game = TicTacToeGame()
 
-        val isMark = game.makeMove(0, 0)
+        val gameState = game.makeMove(0, 0)
         val currentPlayer = game.getCurrentPlayer()
 
-        assertTrue(isMark)
+        assertTrue(gameState.board[0][0] == Player.X)
         assertEquals(Player.O, currentPlayer)
     }
 
@@ -75,9 +79,9 @@ class GameTest {
         game.makeMove(0, 1)//X
         game.makeMove(1, 1)//O
         game.makeMove(0, 2)//X
-        val isGameOver=game.makeMove(2, 2)
+        val gameState=game.makeMove(2, 2)
 
-        assertFalse(isGameOver)
+        assertTrue(gameState.isGameOver)
     }
     @Test
     fun makeMoveShouldNotAllowSwitchPlayerAfterGameOver() {
@@ -90,7 +94,7 @@ class GameTest {
         game.makeMove(0, 2)//X
         val isGameOver=game.makeMove(2, 2)//O
 
-        assertFalse(isGameOver)
+        assertTrue(isGameOver.isGameOver)
         assertEquals(Player.X, game.getCurrentPlayer())
         assertNotEquals(Player.O, game.getCurrentPlayer())
 

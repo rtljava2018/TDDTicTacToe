@@ -1,4 +1,4 @@
-package com.rtllabs.tddtictactoe.domain
+package com.rtllabs.tddtictactoe.domain.entity
 
 class Board {
 

@@ -1,5 +1,7 @@
 package com.rtllabs.tddtictactoe.domain
 
+import com.rtllabs.tddtictactoe.domain.entity.Board
+import com.rtllabs.tddtictactoe.domain.entity.Player
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -26,7 +28,7 @@ class BoardTest {
     fun gameBoardShouldReturnTrueWhenAllCellsIsFull() {
         for (i in 0 until 3){
             for (j in 0 until 3){
-                board.setCells(i,j,Player.X)
+                board.setCells(i,j, Player.X)
             }
         }
 
@@ -40,7 +42,7 @@ class BoardTest {
     @Test
     fun setCellShouldPlacePlayersInEmptyCellReturnTrue() {
 
-        val success=board.setCells(0,0,Player.X)
+        val success=board.setCells(0,0, Player.X)
 
         assertTrue(success)
     }
@@ -48,8 +50,8 @@ class BoardTest {
     @Test
     fun setCellShouldNotPlacePlayersExistingCellReturnFalse() {
 
-        board.setCells(0,0,Player.X)
-        val isPlaced=board.setCells(0,0,Player.O)
+        board.setCells(0,0, Player.X)
+        val isPlaced=board.setCells(0,0, Player.O)
 
         assertFalse(isPlaced)
     }
@@ -57,7 +59,7 @@ class BoardTest {
     @Test
     fun getCellShouldReturnPlayerInExistingCell() {
 
-        board.setCells(0,0,Player.X)
+        board.setCells(0,0, Player.X)
         val player=board.getCell(0,0)
 
         assertEquals(Player.X,player)
