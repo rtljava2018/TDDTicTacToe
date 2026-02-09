@@ -10,6 +10,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -79,6 +80,29 @@ class TicTacToeViewModelTest {
             assertTrue(state is GameUiState.GameWon)
             val won=state as GameUiState.GameWon
             assertEquals(Player.X,won.winner)
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
+    @Test
+    fun ticTacToeViewModelOnCellClickedShouldEmitDrawState() = runTest{
+
+        val fakeState = GameState(
+            board = List(3) { List<Player?>(3) { null } },
+            currentPlayer = Player.O,
+            winner = null,
+            isDraw = true,
+            isGameOver = true
+        )
+
+        every { makeMoveUseCase.invoke(2,2) } returns fakeState
+
+        viewModel.uiState.test {
+            skipItems(1) //skip initial state
+            viewModel.onCellClicked(2,2)
+            val state = awaitItem()
+
+            assertTrue(state is GameUiState.GameDraw)
             cancelAndIgnoreRemainingEvents()
         }
     }

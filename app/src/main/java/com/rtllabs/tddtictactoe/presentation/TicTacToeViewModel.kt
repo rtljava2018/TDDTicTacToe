@@ -27,6 +27,12 @@ class TicTacToeViewModel(private val makeMoveUseCase: MakeMoveUseCase) : ViewMod
                 )
             }
 
+            gameState.isDraw -> {
+                _uiState.value = GameUiState.GameDraw(
+                    board = gameState.board
+                )
+            }
+
             else -> {
                 _uiState.value = GameUiState.GameInProgress(
                     board = gameState.board,
