@@ -89,4 +89,22 @@ class MakeMoveUseCaseTest {
         assertTrue(gameState.isGameOver)
     }
 
+    @Test
+    fun makeMoveUseCaseShouldDetectDraw(){
+
+        useCase(0,0)//X
+        useCase(0,1)//O
+        useCase(0,2)//X
+        useCase(1,1)//O
+        useCase(1,0)//X
+        useCase(1,2)//O
+        useCase(2,1)//X
+        useCase(2,0)//O
+        val gameState=useCase(2,2)//X
+
+        assertTrue(gameState.isDraw)
+        assertNull(gameState.winner)
+        assertTrue(gameState.isGameOver)
+    }
+
 }
