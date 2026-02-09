@@ -59,4 +59,19 @@ class MakeMoveUseCaseTest {
         assertTrue(gameState.isGameOver)
     }
 
+    @Test
+    fun makeMoveUseCaseShouldDetectColumnWin(){
+
+        useCase(0,0)//X
+        useCase(1,1)//O
+        useCase(1,0)//X
+        useCase(2,1)//O
+        val gameState=useCase(2,0)//X
+
+        assertEquals(Player.X, gameState.board[0][0])
+        assertNotNull(gameState.winner)
+        assertFalse(gameState.isDraw)
+        assertTrue(gameState.isGameOver)
+    }
+
 }
