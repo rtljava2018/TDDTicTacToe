@@ -2,10 +2,12 @@ package com.rtllabs.tddtictactoe.presentation
 
 import androidx.lifecycle.ViewModel
 import com.rtllabs.tddtictactoe.domain.entity.Player
+import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class TicTacToeViewModel() : ViewModel() {
+class TicTacToeViewModel(private val makeMoveUseCase: MakeMoveUseCase) : ViewModel() {
+
 
     private val _uiState = MutableStateFlow<GameUiState>(
         GameUiState.GameInProgress(
@@ -14,5 +16,15 @@ class TicTacToeViewModel() : ViewModel() {
         )
     )
     val uiState: StateFlow<GameUiState> = _uiState
+
+    fun onCellClicked(row: Int, col: Int) {
+        val gameState = makeMoveUseCase(row, col)
+
+        _uiState.value = GameUiState.GameInProgress(
+            board = gameState.board,
+            currentPlayer = gameState.currentPlayer
+        )
+
+    }
 
 }
