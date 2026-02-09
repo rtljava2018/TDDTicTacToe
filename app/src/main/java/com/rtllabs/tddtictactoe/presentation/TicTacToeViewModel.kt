@@ -19,11 +19,22 @@ class TicTacToeViewModel(private val makeMoveUseCase: MakeMoveUseCase) : ViewMod
 
     fun onCellClicked(row: Int, col: Int) {
         val gameState = makeMoveUseCase(row, col)
+        when {
+            gameState.winner != null -> {
+                _uiState.value = GameUiState.GameWon(
+                    board = gameState.board,
+                    winner = gameState.currentPlayer
+                )
+            }
 
-        _uiState.value = GameUiState.GameInProgress(
-            board = gameState.board,
-            currentPlayer = gameState.currentPlayer
-        )
+            else -> {
+                _uiState.value = GameUiState.GameInProgress(
+                    board = gameState.board,
+                    currentPlayer = gameState.currentPlayer
+                )
+            }
+        }
+
 
     }
 

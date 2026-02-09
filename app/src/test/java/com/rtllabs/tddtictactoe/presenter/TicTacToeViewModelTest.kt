@@ -58,6 +58,31 @@ class TicTacToeViewModelTest {
         }
     }
 
+    @Test
+    fun ticTacToeViewModelOnCellClickedShouldEmitWonState() = runTest{
+
+        val fakeState = GameState(
+            board = List(3) { List<Player?>(3) { null } },
+            currentPlayer = Player.X,
+            winner = Player.X,
+            isDraw = false,
+            isGameOver = true
+        )
+
+        every { makeMoveUseCase.invoke(0,2) } returns fakeState
+
+        viewModel.uiState.test {
+            skipItems(1) //skip initial state
+            viewModel.onCellClicked(0,2)
+            val state = awaitItem()
+
+            assertTrue(state is GameUiState.GameWon)
+            val won=state as GameUiState.GameWon
+            assertEquals(Player.X,won.winner)
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
+
 
 
 
