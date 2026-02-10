@@ -23,8 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             TDDTicTacToeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    GameScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -33,15 +32,10 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    GameScreen()
-}
-
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     TDDTicTacToeTheme {
-        Greeting("Android")
+        GameScreen()
     }
 }
