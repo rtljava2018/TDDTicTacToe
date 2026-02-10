@@ -1,19 +1,15 @@
 package com.rtllabs.tddtictactoe.GameScreen
 
-import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
-import com.rtllabs.tddtictactoe.domain.entity.GameState
-import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
 import com.rtllabs.tddtictactoe.presentation.TicTacToeViewModel
 import com.rtllabs.tddtictactoe.ui.component.GameScreen
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import io.mockk.every
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
