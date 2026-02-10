@@ -28,16 +28,12 @@
   <pre>
 # Clone the repository
 git clone https://github.com/rtllabs/tdd-tictactoe.git
-
 # Navigate into the project
 cd tdd-tictactoe
-
 # Build the project
 ./gradlew build
-
 # Run unit tests
 ./gradlew test
-
 # Run instrumentation (UI) tests
 ./gradlew connectedAndroidTest
   </pre>
@@ -116,7 +112,7 @@ cd tdd-tictactoe
     <ul>
       <li><strong>TDD discipline</strong> (domain logic fully covered).</li>
       <li><strong>Composable UI testing</strong> (asserting text and board updates).</li>
-      <li><strong>Hilt DI integration</strong> (real dependencies injected in tests).</li>
+      <li><strong>Hilt DI integration</strong></li>
     </ul>
 
 
