@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.rtllabs.tddtictactoe.ui.component.GameScreen
 import com.rtllabs.tddtictactoe.ui.theme.TDDTicTacToeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,10 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+    GameScreen()
 }
 
 @Preview(showBackground = true)
