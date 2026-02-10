@@ -22,7 +22,7 @@
       <li>Reset functionality.</li>
       <li>Reactive UI updates via <code>StateFlow</code>.</li>
     </ul>
-  </p>
+
 
 <h2>🚀 How to Clone &amp; Run</h2>
   <pre>
@@ -118,7 +118,7 @@ cd tdd-tictactoe
       <li><strong>Composable UI testing</strong> (asserting text and board updates).</li>
       <li><strong>Hilt DI integration</strong> (real dependencies injected in tests).</li>
     </ul>
-  </p>
+
 
 </body>
 </html>
