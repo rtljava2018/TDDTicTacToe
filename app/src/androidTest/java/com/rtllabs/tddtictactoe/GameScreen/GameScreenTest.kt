@@ -78,4 +78,24 @@ class GameScreenTest {
 
         composeTestRule.onNodeWithText("Winner: X").assertExists()
     }
+
+    @Test
+    fun gameScreenDrawShouldShowDrawMessage() {
+
+        composeTestRule.setContent {
+            GameScreen(ticTacToeViewModel = viewModel)
+        }
+
+        viewModel.onCellClicked(0,0) // X
+        viewModel.onCellClicked(0,1) // O
+        viewModel.onCellClicked(0,2) // X
+        viewModel.onCellClicked(1,1) // O
+        viewModel.onCellClicked(1,0) // X
+        viewModel.onCellClicked(1,2) // X
+        viewModel.onCellClicked(2,1) // X
+        viewModel.onCellClicked(2,0) // X
+        viewModel.onCellClicked(2,2) // X
+
+        composeTestRule.onNodeWithText("It's a Draw!").assertExists()
+    }
 }
