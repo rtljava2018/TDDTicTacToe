@@ -3,10 +3,14 @@ package com.rtllabs.tddtictactoe.presentation
 import androidx.lifecycle.ViewModel
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class TicTacToeViewModel(private val makeMoveUseCase: MakeMoveUseCase) : ViewModel() {
+@HiltViewModel
+class TicTacToeViewModel @Inject constructor(
+    private val makeMoveUseCase: MakeMoveUseCase) : ViewModel() {
 
 
     private val _uiState = MutableStateFlow<GameUiState>(
