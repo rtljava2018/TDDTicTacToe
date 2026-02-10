@@ -62,4 +62,20 @@ class GameScreenTest {
 
 
     }
+
+    @Test
+    fun gameScreenRowWinShouldShowWinnerMessage() {
+
+        composeTestRule.setContent {
+            GameScreen(ticTacToeViewModel = viewModel)
+        }
+
+        viewModel.onCellClicked(0,0) // X
+        viewModel.onCellClicked(1,0) // O
+        viewModel.onCellClicked(0,1) // X
+        viewModel.onCellClicked(1,1) // O
+        viewModel.onCellClicked(0,2) // X wins
+
+        composeTestRule.onNodeWithText("Winner: X").assertExists()
+    }
 }
