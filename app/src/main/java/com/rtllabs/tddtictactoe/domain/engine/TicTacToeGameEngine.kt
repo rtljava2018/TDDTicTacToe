@@ -80,6 +80,13 @@ class TicTacToeGameEngine {
         return null
     }
 
+    fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
+        for (column in cells.indices) {
+            if (cells[row][column] != player) return null
+        }
+        return player
+    }
+
     private fun switchPlayer() {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
