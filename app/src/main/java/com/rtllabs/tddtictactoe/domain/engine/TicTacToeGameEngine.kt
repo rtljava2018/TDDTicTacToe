@@ -87,6 +87,13 @@ class TicTacToeGameEngine {
         return player
     }
 
+    fun checkWinnerByColumn(cells: List<List<Player?>>, column: Int, player: Player): Player? {
+        for (row in cells.indices) {
+            if (cells[row][column] != player) return null
+        }
+        return player
+    }
+
     private fun switchPlayer() {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
