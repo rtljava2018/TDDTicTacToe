@@ -1,18 +1,18 @@
 package com.rtllabs.tddtictactoe.domain.usecase
 
-import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGame
+import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
 class MakeMoveUseCaseTest {
-    private lateinit var game: TicTacToeGame
+    private lateinit var game: TicTacToeGameEngine
     private lateinit var useCase: MakeMoveUseCase
 
     @Before
     fun setup(){
-        game = TicTacToeGame()
+        game = TicTacToeGameEngine()
         useCase = MakeMoveUseCase(game)
     }
 

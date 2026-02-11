@@ -4,7 +4,7 @@ import com.rtllabs.tddtictactoe.domain.entity.Board
 import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 
-class TicTacToeGame {
+class TicTacToeGameEngine {
     private val board = Board()
     private var currentPlayer = Player.X
     private var winner: Player? = null
