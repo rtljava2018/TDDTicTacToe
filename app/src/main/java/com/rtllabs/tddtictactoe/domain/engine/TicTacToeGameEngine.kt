@@ -27,21 +27,21 @@ class TicTacToeGameEngine {
         return isDraw
     }
 
-    fun makeMove(row: Int, col: Int): GameState {
+    fun makeMove(row: Int, column: Int): GameState {
         if (isGameOver()) {
             return snapshot()
         }
-        val isMark=board.setCells(row, col, currentPlayer)
+        val isMark=board.setCells(row, column, currentPlayer)
         if (!isMark) return snapshot()
-        evaluateGameState()
+        evaluateGameState(row,column)
         if(!isGameOver()) {
             switchPlayer()
         }
         return snapshot()
     }
 
-    private fun evaluateGameState() {
-        winner = checkWinner()
+    private fun evaluateGameState(row: Int, column: Int) {
+        winner = checkWinnerAfterMove(row,column)
         if (winner == null && board.isBoardFull()) {
             isDraw = true
         }
@@ -52,6 +52,8 @@ class TicTacToeGameEngine {
     }
 
 
+    /*Deprecated*/
+    @Deprecated("Moved to optimised logic in checkWinnerAfterMove")
     private fun checkWinner(): Player? {
         val cells = board.getAllCells()
 
@@ -79,6 +81,28 @@ class TicTacToeGameEngine {
 
         return null
     }
+
+    private fun checkWinnerAfterMove(row: Int, column: Int): Player? {
+        val cells = board.getAllCells()
+        val player = cells[row][column] ?: return null
+
+        checkWinnerByRow(cells, row, player)?.let { return it }
+
+        checkWinnerByColumn(cells, column, player)?.let { return it }
+
+        if (row == column) {
+            checkWinnerByMainDiagonal(cells, player)?.let { return it }
+        }
+
+        if (row + column == cells.size - 1) {
+            checkWinnerByAntiDiagonal(cells, player)?.let { return it }
+        }
+
+        return null
+
+
+    }
+
 
     fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
         for (column in cells.indices) {
