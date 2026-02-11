@@ -251,4 +251,16 @@ class TicTacToeGameEngineTest {
         assertNull(winner)
     }
 
+    @Test
+    fun checkWinnerByMainDiagonalShouldDetectRowAndReturnWinner(){
+        val game = TicTacToeGameEngine()
+        game.getBoard().setCells(0,0, Player.X)
+        game.getBoard().setCells(1,1, Player.X)
+        game.getBoard().setCells(2,2, Player.X)
+
+        val winner=game.checkWinnerByMainDiagonal(game.getBoard().getAllCells(),Player.X)
+
+        assertEquals(Player.X,winner)
+    }
+
 }

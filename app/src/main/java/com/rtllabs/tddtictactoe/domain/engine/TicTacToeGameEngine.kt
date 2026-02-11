@@ -94,6 +94,13 @@ class TicTacToeGameEngine {
         return player
     }
 
+    fun checkWinnerByMainDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+        for (index in cells.indices) {
+            if (cells[index][index] != player) return null
+        }
+        return player
+    }
+
     private fun switchPlayer() {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
