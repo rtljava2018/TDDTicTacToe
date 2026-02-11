@@ -26,9 +26,9 @@ class BoardTest {
 
     @Test
     fun gameBoardShouldReturnTrueWhenAllCellsIsFull() {
-        for (i in 0 until 3){
-            for (j in 0 until 3){
-                board.setCells(i,j, Player.X)
+        for (row in 0 until 3){
+            for (column in 0 until 3){
+                board.setCells(row,column, Player.X)
             }
         }
 
