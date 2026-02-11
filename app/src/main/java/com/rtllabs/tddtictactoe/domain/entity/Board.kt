@@ -3,7 +3,7 @@ package com.rtllabs.tddtictactoe.domain.entity
 class Board {
 
     private val cells: MutableList<MutableList<Player?>>
-                    = MutableList(3){ MutableList(3){ null} }
+                    = MutableList(3){ MutableList(3){ null } }
 
     fun isEmpty(): Boolean {
         return cells.all { row -> row.all { cell -> cell == null } }
@@ -13,14 +13,14 @@ class Board {
         return cells.all { row -> row.all { cell -> cell != null } }
     }
 
-    fun setCells(row: Int, col: Int, x: Player): Boolean {
-        if (cells[row][col] != null) return false
-        cells[row][col] = x
+    fun setCells(row: Int, column: Int, player: Player): Boolean {
+        if (cells[row][column] != null) return false
+        cells[row][column] = player
         return true
     }
 
-    fun getCell(row: Int, col: Int): Player? {
-        return cells[row][col]
+    fun getCell(row: Int, column: Int): Player? {
+        return cells[row][column]
     }
 
     fun getAllCells() : List<List<Player?>> {

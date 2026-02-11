@@ -1,6 +1,6 @@
 package com.rtllabs.tddtictactoe.di
 
-import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGame
+import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
 import dagger.Module
 import dagger.Provides
@@ -12,12 +12,12 @@ import dagger.hilt.components.SingletonComponent
 object AppModule {
 
     @Provides
-    fun provideGame(): TicTacToeGame {
-        return TicTacToeGame()
+    fun provideGame(): TicTacToeGameEngine {
+        return TicTacToeGameEngine()
     }
 
     @Provides
-    fun provideMakeMoveUseCase(game: TicTacToeGame): MakeMoveUseCase {
+    fun provideMakeMoveUseCase(game: TicTacToeGameEngine): MakeMoveUseCase {
         return MakeMoveUseCase(game)
     }
 
