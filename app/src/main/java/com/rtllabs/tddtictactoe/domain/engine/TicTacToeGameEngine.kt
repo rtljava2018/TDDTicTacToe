@@ -101,6 +101,14 @@ class TicTacToeGameEngine {
         return player
     }
 
+    fun checkWinnerByAntiDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+        val size = cells.size
+        for (index in 0 until size) {
+            if (cells[index][size - 1 - index] != player) return null
+        }
+        return player
+    }
+
     private fun switchPlayer() {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
