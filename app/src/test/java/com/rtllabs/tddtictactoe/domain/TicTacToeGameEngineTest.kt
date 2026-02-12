@@ -316,6 +316,19 @@ class TicTacToeGameEngineTest {
 
         assertEquals(Player.X,winner)
     }
+    @Test
+    fun checkWinnerByMainDiagonalShouldDetectRowAndReturnWinnerFor4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        for (index in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE){
+            game.board.setCells(index,index, Player.X)
+        }
+
+        val winner=game.checkWinnerByMainDiagonal(game.board.getAllCells(),Player.X)
+
+        assertEquals(Player.X,winner)
+    }
 
     @Test
     fun checkWinnerByMainDiagonalShouldDetectRowAndReturnNull(){
