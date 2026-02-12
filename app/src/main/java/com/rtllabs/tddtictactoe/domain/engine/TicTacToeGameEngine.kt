@@ -5,27 +5,15 @@ import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 
 class TicTacToeGameEngine {
-    private val board = Board()
-    private var currentPlayer = Player.X
-    private var winner: Player? = null
-    private var isDraw = false
+    var board = Board()
+        private set
+    var currentPlayer = Player.X
+        private set
+    var winner: Player? = null
+        private set
+    var isDraw = false
+        private set
 
-
-    fun getBoard(): Board {
-        return board
-    }
-
-    fun getCurrentPlayer(): Player {
-        return currentPlayer
-    }
-
-    fun getWinner(): Player? {
-        return winner
-    }
-
-    fun isDraw(): Boolean {
-        return isDraw
-    }
 
     fun makeMove(row: Int, column: Int): GameState {
         if (isGameOver()) {
