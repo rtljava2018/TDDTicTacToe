@@ -14,13 +14,23 @@ class MakeMoveUseCaseTest {
     @Before
     fun setup(){
         game = TicTacToeGameEngine()
-        game.board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase = MakeMoveUseCase(game)
     }
 
     @Test
-    fun makeMoveUseCaseShouldReactWithUpdatedGameState(){
+    fun makeMoveUseCaseStartNewGameShouldReturnBoardSize(){
 
+        val gameState=useCase.startNewGame(TicTacToeConfig.FIVE_BY_FIVE_SIZE)
+
+        assertFalse(gameState.isDraw)
+        assertNull(gameState.winner)
+        assertFalse(gameState.isGameOver)
+        assertEquals(TicTacToeConfig.FIVE_BY_FIVE_SIZE ,gameState.board.size)
+    }
+
+    @Test
+    fun makeMoveUseCaseShouldReactWithUpdatedGameState(){
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         val gameState1=useCase(0,0)//X
         val gameState2=useCase(1,1)//O
 
@@ -33,7 +43,7 @@ class MakeMoveUseCaseTest {
 
     @Test
     fun makeMoveUseCaseShouldNotAllowToMoveOnOccupiedCell(){
-
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         val gameState1=useCase(0,0)//X
         val gameState2=useCase(0,0)//O
 
@@ -48,7 +58,7 @@ class MakeMoveUseCaseTest {
 
     @Test
     fun makeMoveUseCaseShouldDetectRowWin(){
-
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase(0,0)//X
         useCase(1,0)//O
         useCase(0,1)//X
@@ -63,7 +73,7 @@ class MakeMoveUseCaseTest {
 
     @Test
     fun makeMoveUseCaseShouldDetectColumnWin(){
-
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase(0,0)//X
         useCase(1,1)//O
         useCase(1,0)//X
@@ -78,7 +88,7 @@ class MakeMoveUseCaseTest {
 
     @Test
     fun makeMoveUseCaseShouldDetectDiagonalWin(){
-
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase(0,0)//X
         useCase(1,0)//O
         useCase(1,1)//X
@@ -93,7 +103,7 @@ class MakeMoveUseCaseTest {
 
     @Test
     fun makeMoveUseCaseShouldDetectDraw(){
-
+        useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase(0,0)//X
         useCase(0,1)//O
         useCase(0,2)//X

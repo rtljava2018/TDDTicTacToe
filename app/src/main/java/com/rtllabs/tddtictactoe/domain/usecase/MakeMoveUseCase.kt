@@ -7,6 +7,11 @@ import javax.inject.Inject
 class MakeMoveUseCase @Inject constructor(
     private val game: TicTacToeGameEngine) {
 
+    fun startNewGame(boardSize: Int) : GameState{
+        game.initBoard(boardSize)
+        return game.snapshot()
+    }
+
     operator fun invoke(row: Int, col: Int): GameState {
         return game.makeMove(row, col)
     }
