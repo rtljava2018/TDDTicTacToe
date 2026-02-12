@@ -14,6 +14,9 @@ class TicTacToeGameEngine {
     var isDraw = false
         private set
 
+    fun initBoard(boardSize: Int){
+        board.makeBoard(boardSize)
+    }
 
     fun makeMove(row: Int, column: Int): GameState {
         if (isGameOver()) {
@@ -95,7 +98,7 @@ class TicTacToeGameEngine {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
 
-    private fun snapshot(): GameState {
+    internal fun snapshot(): GameState {
         return GameState(
             board = board.getAllCells().map { it.toList() },
             currentPlayer = currentPlayer,

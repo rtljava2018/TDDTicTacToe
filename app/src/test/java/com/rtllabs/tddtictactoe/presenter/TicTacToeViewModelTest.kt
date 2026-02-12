@@ -6,17 +6,41 @@ import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
 import com.rtllabs.tddtictactoe.presentation.GameUiState
 import com.rtllabs.tddtictactoe.presentation.TicTacToeViewModel
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 
 class TicTacToeViewModelTest {
 
     private val makeMoveUseCase = mockk<MakeMoveUseCase>()
-    private val viewModel = TicTacToeViewModel(makeMoveUseCase)
+    private lateinit var viewModel : TicTacToeViewModel
+
+    @Before
+    fun setup(){
+        val fakeGameState = GameState(
+            board = List(TicTacToeConfig.TIC_TAC_TOE_SIZE) { List(TicTacToeConfig.TIC_TAC_TOE_SIZE) { null } },
+            currentPlayer = Player.X,
+            winner = null,
+            isDraw = false,
+            isGameOver = false )
+        every { makeMoveUseCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE) } returns fakeGameState
+        viewModel = TicTacToeViewModel(makeMoveUseCase)
+    }
+
+    @Test
+    fun ticTacToeViewModelInitShouldReturnInitGameUiState(){
+
+        val state=viewModel.uiState.value
+
+        assertTrue(state is GameUiState.GameInProgress)
+        assertEquals(3,(state as GameUiState.GameInProgress).board.size)
+
+    }
 
     @Test
     fun ticTacToeViewModelInitialStateShouldBeInProgress() = runTest{

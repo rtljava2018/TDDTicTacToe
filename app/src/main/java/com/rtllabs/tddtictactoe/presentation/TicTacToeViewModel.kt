@@ -3,6 +3,7 @@ package com.rtllabs.tddtictactoe.presentation
 import androidx.lifecycle.ViewModel
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,11 +16,20 @@ class TicTacToeViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow<GameUiState>(
         GameUiState.GameInProgress(
-            board = List(3) { List(3) { null } },
+            board = emptyList(),
             currentPlayer = Player.X
         )
     )
     val uiState: StateFlow<GameUiState> = _uiState
+
+    init {
+        val initialState = makeMoveUseCase.startNewGame(
+            TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        _uiState.value = GameUiState.GameInProgress(
+            board = initialState.board,
+            currentPlayer = initialState.currentPlayer )
+    }
 
     fun onCellClicked(row: Int, col: Int) {
         val gameState = makeMoveUseCase(row, col)
