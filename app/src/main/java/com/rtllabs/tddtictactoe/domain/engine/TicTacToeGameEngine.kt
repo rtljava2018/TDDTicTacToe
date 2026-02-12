@@ -62,28 +62,28 @@ class TicTacToeGameEngine {
     }
 
 
-    fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
+    internal fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
         for (column in cells.indices) {
             if (cells[row][column] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByColumn(cells: List<List<Player?>>, column: Int, player: Player): Player? {
+    internal fun checkWinnerByColumn(cells: List<List<Player?>>, column: Int, player: Player): Player? {
         for (row in cells.indices) {
             if (cells[row][column] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByMainDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+    internal fun checkWinnerByMainDiagonal(cells: List<List<Player?>>, player: Player): Player? {
         for (index in cells.indices) {
             if (cells[index][index] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByAntiDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+    internal fun checkWinnerByAntiDiagonal(cells: List<List<Player?>>, player: Player): Player? {
         val size = cells.size
         for (index in 0 until size) {
             if (cells[index][size - 1 - index] != player) return null
