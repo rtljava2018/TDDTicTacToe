@@ -262,6 +262,20 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
+    fun checkWinnerByRowShouldDetectRowAndReturnWinner4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        val targetRow=1
+        for (column in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE){
+            game.board.setCells(targetRow,column, Player.X)
+        }
+        val winner=game.checkWinnerByRow(game.board.getAllCells(),1,Player.X)
+
+        assertEquals(Player.X,winner)
+    }
+
+    @Test
     fun checkWinnerByRowShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
