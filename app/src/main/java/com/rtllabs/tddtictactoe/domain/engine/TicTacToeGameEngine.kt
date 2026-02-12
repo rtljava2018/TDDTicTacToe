@@ -40,36 +40,6 @@ class TicTacToeGameEngine {
     }
 
 
-    /*Deprecated*/
-    @Deprecated("Moved to optimised logic in checkWinnerAfterMove")
-    private fun checkWinner(): Player? {
-        val cells = board.getAllCells()
-
-        //rows
-        for (i in 0..2) {
-            if (cells[i][0] != null && cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) {
-                return cells[i][0]
-            }
-        }
-
-        //columns
-        for (j in 0..2) {
-            if (cells[0][j] != null && cells[0][j] == cells[1][j] && cells[1][j] == cells[2][j]) {
-                return cells[0][j]
-            }
-        }
-
-        //diagonals
-        if (cells[0][0] != null && cells[0][0] == cells[1][1] && cells[1][1] == cells[2][2]) {
-            return cells[0][0]
-        }
-        if (cells[0][2] != null && cells[0][2] == cells[1][1] && cells[1][1] == cells[2][0]) {
-            return cells[0][2]
-        }
-
-        return null
-    }
-
     private fun checkWinnerAfterMove(row: Int, column: Int): Player? {
         val cells = board.getAllCells()
         val player = cells[row][column] ?: return null
