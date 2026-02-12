@@ -30,8 +30,8 @@ class BoardTest {
     fun gameBoardShouldReturnTrueWhenAllCellsIsFull() {
         board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        for (row in 0 until 3){
-            for (column in 0 until 3){
+        for (row in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+            for (column in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
                 board.setCells(row,column, Player.X)
             }
         }
@@ -73,12 +73,12 @@ class BoardTest {
     }
 
     @Test
-    fun getAllCellsShouldReturnAllCells() {
+    fun getAllCellsShouldReturnAllCells3X3() {
         board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         val cells= board.getAllCells()
 
-        assertEquals(3,cells.size)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,cells.size)
 
     }
 
