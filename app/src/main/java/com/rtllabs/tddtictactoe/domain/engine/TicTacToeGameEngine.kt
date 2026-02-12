@@ -5,27 +5,15 @@ import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 
 class TicTacToeGameEngine {
-    private val board = Board()
-    private var currentPlayer = Player.X
-    private var winner: Player? = null
-    private var isDraw = false
+    var board = Board()
+        private set
+    var currentPlayer = Player.X
+        private set
+    var winner: Player? = null
+        private set
+    var isDraw = false
+        private set
 
-
-    fun getBoard(): Board {
-        return board
-    }
-
-    fun getCurrentPlayer(): Player {
-        return currentPlayer
-    }
-
-    fun getWinner(): Player? {
-        return winner
-    }
-
-    fun isDraw(): Boolean {
-        return isDraw
-    }
 
     fun makeMove(row: Int, column: Int): GameState {
         if (isGameOver()) {
@@ -52,36 +40,6 @@ class TicTacToeGameEngine {
     }
 
 
-    /*Deprecated*/
-    @Deprecated("Moved to optimised logic in checkWinnerAfterMove")
-    private fun checkWinner(): Player? {
-        val cells = board.getAllCells()
-
-        //rows
-        for (i in 0..2) {
-            if (cells[i][0] != null && cells[i][0] == cells[i][1] && cells[i][1] == cells[i][2]) {
-                return cells[i][0]
-            }
-        }
-
-        //columns
-        for (j in 0..2) {
-            if (cells[0][j] != null && cells[0][j] == cells[1][j] && cells[1][j] == cells[2][j]) {
-                return cells[0][j]
-            }
-        }
-
-        //diagonals
-        if (cells[0][0] != null && cells[0][0] == cells[1][1] && cells[1][1] == cells[2][2]) {
-            return cells[0][0]
-        }
-        if (cells[0][2] != null && cells[0][2] == cells[1][1] && cells[1][1] == cells[2][0]) {
-            return cells[0][2]
-        }
-
-        return null
-    }
-
     private fun checkWinnerAfterMove(row: Int, column: Int): Player? {
         val cells = board.getAllCells()
         val player = cells[row][column] ?: return null
@@ -104,28 +62,28 @@ class TicTacToeGameEngine {
     }
 
 
-    fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
+    internal fun checkWinnerByRow(cells: List<List<Player?>>, row: Int, player: Player): Player? {
         for (column in cells.indices) {
             if (cells[row][column] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByColumn(cells: List<List<Player?>>, column: Int, player: Player): Player? {
+    internal fun checkWinnerByColumn(cells: List<List<Player?>>, column: Int, player: Player): Player? {
         for (row in cells.indices) {
             if (cells[row][column] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByMainDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+    internal fun checkWinnerByMainDiagonal(cells: List<List<Player?>>, player: Player): Player? {
         for (index in cells.indices) {
             if (cells[index][index] != player) return null
         }
         return player
     }
 
-    fun checkWinnerByAntiDiagonal(cells: List<List<Player?>>, player: Player): Player? {
+    internal fun checkWinnerByAntiDiagonal(cells: List<List<Player?>>, player: Player): Player? {
         val size = cells.size
         for (index in 0 until size) {
             if (cells[index][size - 1 - index] != player) return null

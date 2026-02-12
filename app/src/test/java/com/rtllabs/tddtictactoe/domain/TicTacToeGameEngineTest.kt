@@ -9,7 +9,7 @@ class TicTacToeGameEngineTest {
     @Test
     fun gameShouldStartWithEmptyBoard(){
         val game = TicTacToeGameEngine()
-        val board = game.getBoard()
+        val board = game.board
 
         assertTrue(board.isEmpty())
 
@@ -19,21 +19,21 @@ class TicTacToeGameEngineTest {
     fun gameShouldStartWithPlayerX() {
         val game = TicTacToeGameEngine()
 
-        assertEquals(Player.X, game.getCurrentPlayer())
+        assertEquals(Player.X, game.currentPlayer)
     }
 
     @Test
     fun gameShouldStartWithNoWinner() {
         val game = TicTacToeGameEngine()
 
-        assertNull(game.getWinner())
+        assertNull(game.winner)
     }
 
     @Test
     fun gameShouldNotBeDrawInitially() {
         val game = TicTacToeGameEngine()
 
-        assertFalse(game.isDraw())
+        assertFalse(game.isDraw)
     }
 
     @Test
@@ -64,7 +64,7 @@ class TicTacToeGameEngineTest {
         val game = TicTacToeGameEngine()
 
         val gameState = game.makeMove(0, 0)
-        val currentPlayer = game.getCurrentPlayer()
+        val currentPlayer = game.currentPlayer
 
         assertTrue(gameState.board[0][0] == Player.X)
         assertEquals(Player.O, currentPlayer)
@@ -95,8 +95,8 @@ class TicTacToeGameEngineTest {
         val isGameOver=game.makeMove(2, 2)//O
 
         assertTrue(isGameOver.isGameOver)
-        assertEquals(Player.X, game.getCurrentPlayer())
-        assertNotEquals(Player.O, game.getCurrentPlayer())
+        assertEquals(Player.X, game.currentPlayer)
+        assertNotEquals(Player.O, game.currentPlayer)
 
     }
 
@@ -108,7 +108,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(0, 1)//X
         game.makeMove(1, 1)//O
         game.makeMove(0, 2)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertEquals(Player.X, winner)
     }
@@ -121,7 +121,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(1, 0)//X
         game.makeMove(1, 1)//O
         game.makeMove(2, 0)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertEquals(Player.X, winner)
     }
@@ -134,7 +134,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(1, 1)//X
         game.makeMove(1, 0)//O
         game.makeMove(2, 2)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertEquals(Player.X, winner)
     }
@@ -147,7 +147,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(1, 1)//X
         game.makeMove(1, 0)//O
         game.makeMove(0, 2)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertEquals(Player.X, winner)
     }
@@ -164,7 +164,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(2, 1)//X
         game.makeMove(2, 0)//O
         game.makeMove(2, 2)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertNull(winner)
     }
@@ -181,7 +181,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(2, 1)//X
         game.makeMove(2, 0)//O
         game.makeMove(2, 2)//X
-        val winner = game.getWinner()
+        val winner = game.winner
 
         assertNull(winner)
     }
@@ -198,7 +198,7 @@ class TicTacToeGameEngineTest {
         game.makeMove(2, 1)//X
         game.makeMove(2, 0)//O
         game.makeMove(2, 2)//X
-        val isDraw = game.isDraw()
+        val isDraw = game.isDraw
 
         assertTrue(isDraw)
     }
@@ -206,11 +206,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByRowShouldDetectRowAndReturnWinner(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(1,0, Player.X)
-        game.getBoard().setCells(1,1, Player.X)
-        game.getBoard().setCells(1,2, Player.X)
+        game.board.setCells(1,0, Player.X)
+        game.board.setCells(1,1, Player.X)
+        game.board.setCells(1,2, Player.X)
 
-        val winner=game.checkWinnerByRow(game.getBoard().getAllCells(),1,Player.X)
+        val winner=game.checkWinnerByRow(game.board.getAllCells(),1,Player.X)
 
         assertEquals(Player.X,winner)
     }
@@ -218,11 +218,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByRowShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(1,0, Player.X)
-        game.getBoard().setCells(1,1, Player.O)
-        game.getBoard().setCells(1,2, Player.X)
+        game.board.setCells(1,0, Player.X)
+        game.board.setCells(1,1, Player.O)
+        game.board.setCells(1,2, Player.X)
 
-        val winner=game.checkWinnerByRow(game.getBoard().getAllCells(),1,Player.X)
+        val winner=game.checkWinnerByRow(game.board.getAllCells(),1,Player.X)
 
         assertNull(winner)
     }
@@ -230,11 +230,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByColumnShouldDetectRowAndReturnWinner(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(0,2, Player.X)
-        game.getBoard().setCells(1,2, Player.X)
-        game.getBoard().setCells(2,2, Player.X)
+        game.board.setCells(0,2, Player.X)
+        game.board.setCells(1,2, Player.X)
+        game.board.setCells(2,2, Player.X)
 
-        val winner=game.checkWinnerByColumn(game.getBoard().getAllCells(),2,Player.X)
+        val winner=game.checkWinnerByColumn(game.board.getAllCells(),2,Player.X)
 
         assertEquals(Player.X,winner)
     }
@@ -242,11 +242,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByColumnShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(0,2, Player.X)
-        game.getBoard().setCells(1,2, Player.O)
-        game.getBoard().setCells(2,2, Player.X)
+        game.board.setCells(0,2, Player.X)
+        game.board.setCells(1,2, Player.O)
+        game.board.setCells(2,2, Player.X)
 
-        val winner=game.checkWinnerByColumn(game.getBoard().getAllCells(),2,Player.X)
+        val winner=game.checkWinnerByColumn(game.board.getAllCells(),2,Player.X)
 
         assertNull(winner)
     }
@@ -254,11 +254,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByMainDiagonalShouldDetectRowAndReturnWinner(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(0,0, Player.X)
-        game.getBoard().setCells(1,1, Player.X)
-        game.getBoard().setCells(2,2, Player.X)
+        game.board.setCells(0,0, Player.X)
+        game.board.setCells(1,1, Player.X)
+        game.board.setCells(2,2, Player.X)
 
-        val winner=game.checkWinnerByMainDiagonal(game.getBoard().getAllCells(),Player.X)
+        val winner=game.checkWinnerByMainDiagonal(game.board.getAllCells(),Player.X)
 
         assertEquals(Player.X,winner)
     }
@@ -266,11 +266,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByMainDiagonalShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(0,0, Player.X)
-        game.getBoard().setCells(1,1, Player.O)
-        game.getBoard().setCells(2,2, Player.X)
+        game.board.setCells(0,0, Player.X)
+        game.board.setCells(1,1, Player.O)
+        game.board.setCells(2,2, Player.X)
 
-        val winner=game.checkWinnerByMainDiagonal(game.getBoard().getAllCells(),Player.X)
+        val winner=game.checkWinnerByMainDiagonal(game.board.getAllCells(),Player.X)
 
         assertNull(winner)
     }
@@ -278,11 +278,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByAntiDiagonalShouldDetectRowAndReturnWinner(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(2,0, Player.X)
-        game.getBoard().setCells(1,1, Player.X)
-        game.getBoard().setCells(0,2, Player.X)
+        game.board.setCells(2,0, Player.X)
+        game.board.setCells(1,1, Player.X)
+        game.board.setCells(0,2, Player.X)
 
-        val winner=game.checkWinnerByAntiDiagonal(game.getBoard().getAllCells(),Player.X)
+        val winner=game.checkWinnerByAntiDiagonal(game.board.getAllCells(),Player.X)
 
         assertEquals(Player.X,winner)
     }
@@ -290,11 +290,11 @@ class TicTacToeGameEngineTest {
     @Test
     fun checkWinnerByAntiDiagonalShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
-        game.getBoard().setCells(2,0, Player.X)
-        game.getBoard().setCells(1,1, Player.O)
-        game.getBoard().setCells(0,2, Player.X)
+        game.board.setCells(2,0, Player.X)
+        game.board.setCells(1,1, Player.O)
+        game.board.setCells(0,2, Player.X)
 
-        val winner=game.checkWinnerByAntiDiagonal(game.getBoard().getAllCells(),Player.X)
+        val winner=game.checkWinnerByAntiDiagonal(game.board.getAllCells(),Player.X)
 
         assertNull(winner)
     }

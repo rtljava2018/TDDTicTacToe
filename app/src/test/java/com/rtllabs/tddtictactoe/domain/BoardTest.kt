@@ -2,6 +2,7 @@ package com.rtllabs.tddtictactoe.domain
 
 import com.rtllabs.tddtictactoe.domain.entity.Board
 import com.rtllabs.tddtictactoe.domain.entity.Player
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -11,11 +12,12 @@ class BoardTest {
 
     @Before
     fun setup(){
-      board = Board()
+        board = Board()
     }
 
     @Test
     fun gameNewBoardShouldHaveEmptyCells() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         val isEmpty=board.isEmpty()
         val isFull= board.isBoardFull()
@@ -26,8 +28,10 @@ class BoardTest {
 
     @Test
     fun gameBoardShouldReturnTrueWhenAllCellsIsFull() {
-        for (row in 0 until 3){
-            for (column in 0 until 3){
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        for (row in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+            for (column in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
                 board.setCells(row,column, Player.X)
             }
         }
@@ -41,6 +45,7 @@ class BoardTest {
 
     @Test
     fun setCellShouldPlacePlayersInEmptyCellReturnTrue() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         val success=board.setCells(0,0, Player.X)
 
@@ -49,6 +54,7 @@ class BoardTest {
 
     @Test
     fun setCellShouldNotPlacePlayersExistingCellReturnFalse() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         board.setCells(0,0, Player.X)
         val isPlaced=board.setCells(0,0, Player.O)
@@ -58,6 +64,7 @@ class BoardTest {
 
     @Test
     fun getCellShouldReturnPlayerInExistingCell() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         board.setCells(0,0, Player.X)
         val player=board.getCell(0,0)
@@ -66,11 +73,31 @@ class BoardTest {
     }
 
     @Test
-    fun getAllCellsShouldReturnAllCells() {
+    fun getAllCellsShouldReturnAllCells3X3() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
         val cells= board.getAllCells()
 
-        assertEquals(3,cells.size)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,cells.size)
+
+    }
+
+    @Test
+    fun getAllCellsShouldReturnAllCellsFor4x4() {
+        board.makeBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        val cells= board.getAllCells()
+
+        assertEquals(TicTacToeConfig.FOUR_BY_FOUR_SIZE,cells.size)
+
+    }
+    @Test
+    fun getAllCellsShouldReturnAllCellsFor5x5() {
+        board.makeBoard(TicTacToeConfig.FIVE_BY_FIVE_SIZE)
+
+        val cells= board.getAllCells()
+
+        assertEquals(TicTacToeConfig.FIVE_BY_FIVE_SIZE,cells.size)
 
     }
 

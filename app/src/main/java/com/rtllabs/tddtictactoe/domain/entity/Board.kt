@@ -2,8 +2,11 @@ package com.rtllabs.tddtictactoe.domain.entity
 
 class Board {
 
-    private val cells: MutableList<MutableList<Player?>>
-                    = MutableList(3){ MutableList(3){ null } }
+    private lateinit var cells: MutableList<MutableList<Player?>>
+
+    fun makeBoard(boardSize: Int){
+        cells = MutableList(boardSize){ MutableList(boardSize){ null } }
+    }
 
     fun isEmpty(): Boolean {
         return cells.all { row -> row.all { cell -> cell == null } }
