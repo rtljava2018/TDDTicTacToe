@@ -93,6 +93,23 @@ class TicTacToeGameEngineTest {
 
         assertTrue(gameState.isGameOver)
     }
+
+    @Test
+    fun makeMoveShouldNotAllowAfterGameOver4X4() {
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        game.makeMove(0, 0)//X
+        game.makeMove(1, 0)//O
+        game.makeMove(0, 1)//X
+        game.makeMove(1, 1)//O
+        game.makeMove(0, 2)//X
+        game.makeMove(1, 2)//X
+        game.makeMove(0, 3)//X
+        val gameState=game.makeMove(2, 2)
+
+        assertTrue(gameState.isGameOver)
+    }
     @Test
     fun makeMoveShouldNotAllowSwitchPlayerAfterGameOver() {
         val game = TicTacToeGameEngine()
@@ -245,6 +262,20 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
+    fun checkWinnerByRowShouldDetectRowAndReturnWinner4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        val targetRow=1
+        for (column in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE){
+            game.board.setCells(targetRow,column, Player.X)
+        }
+        val winner=game.checkWinnerByRow(game.board.getAllCells(),1,Player.X)
+
+        assertEquals(Player.X,winner)
+    }
+
+    @Test
     fun checkWinnerByRowShouldDetectRowAndReturnNull(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
@@ -259,7 +290,7 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
-    fun checkWinnerByColumnShouldDetectRowAndReturnWinner(){
+    fun checkWinnerByColumnShouldDetectColumnAndReturnWinner(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
@@ -273,7 +304,21 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
-    fun checkWinnerByColumnShouldDetectRowAndReturnNull(){
+    fun checkWinnerByColumnShouldDetectColumnAndReturnWinner4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        val targetColumn=2
+        for (row in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE){
+            game.board.setCells(row,targetColumn, Player.X)
+        }
+        val winner=game.checkWinnerByColumn(game.board.getAllCells(),2,Player.X)
+
+        assertEquals(Player.X,winner)
+    }
+
+    @Test
+    fun checkWinnerByColumnShouldDetectColumnAndReturnNull(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
@@ -287,7 +332,7 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
-    fun checkWinnerByMainDiagonalShouldDetectRowAndReturnWinner(){
+    fun checkWinnerByMainDiagonalShouldDetectMainDiagonalAndReturnWinner(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
@@ -299,9 +344,22 @@ class TicTacToeGameEngineTest {
 
         assertEquals(Player.X,winner)
     }
+    @Test
+    fun checkWinnerByMainDiagonalShouldDetectMainDiagonalAndReturnWinnerFor4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        for (index in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE){
+            game.board.setCells(index,index, Player.X)
+        }
+
+        val winner=game.checkWinnerByMainDiagonal(game.board.getAllCells(),Player.X)
+
+        assertEquals(Player.X,winner)
+    }
 
     @Test
-    fun checkWinnerByMainDiagonalShouldDetectRowAndReturnNull(){
+    fun checkWinnerByMainDiagonalShouldDetectMainDiagonalAndReturnNull(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
@@ -315,7 +373,7 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
-    fun checkWinnerByAntiDiagonalShouldDetectRowAndReturnWinner(){
+    fun checkWinnerByAntiDiagonalShouldDetectAntiDiagonalAndReturnWinner(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
@@ -329,7 +387,21 @@ class TicTacToeGameEngineTest {
     }
 
     @Test
-    fun checkWinnerByAntiDiagonalShouldDetectRowAndReturnNull(){
+    fun checkWinnerByAntiDiagonalShouldDetectAntiDiagonalAndReturnWinner4X4(){
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        for (i in 0 until TicTacToeConfig.FOUR_BY_FOUR_SIZE) {
+            game.board.setCells(i, TicTacToeConfig.FOUR_BY_FOUR_SIZE - 1 - i, Player.X)
+        }
+
+        val winner=game.checkWinnerByAntiDiagonal(game.board.getAllCells(),Player.X)
+
+        assertEquals(Player.X,winner)
+    }
+
+    @Test
+    fun checkWinnerByAntiDiagonalShouldDetectAntiDiagonalAndReturnNull(){
         val game = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
