@@ -2,6 +2,7 @@ package com.rtllabs.tddtictactoe.domain.usecase
 
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -13,6 +14,7 @@ class MakeMoveUseCaseTest {
     @Before
     fun setup(){
         game = TicTacToeGameEngine()
+        game.board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         useCase = MakeMoveUseCase(game)
     }
 
