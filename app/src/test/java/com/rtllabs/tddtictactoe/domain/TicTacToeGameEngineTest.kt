@@ -93,6 +93,23 @@ class TicTacToeGameEngineTest {
 
         assertTrue(gameState.isGameOver)
     }
+
+    @Test
+    fun makeMoveShouldNotAllowAfterGameOver4X4() {
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.FOUR_BY_FOUR_SIZE)
+
+        game.makeMove(0, 0)//X
+        game.makeMove(1, 0)//O
+        game.makeMove(0, 1)//X
+        game.makeMove(1, 1)//O
+        game.makeMove(0, 2)//X
+        game.makeMove(1, 2)//X
+        game.makeMove(0, 3)//X
+        val gameState=game.makeMove(2, 2)
+
+        assertTrue(gameState.isGameOver)
+    }
     @Test
     fun makeMoveShouldNotAllowSwitchPlayerAfterGameOver() {
         val game = TicTacToeGameEngine()
