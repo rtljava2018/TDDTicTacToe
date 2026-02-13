@@ -1,5 +1,6 @@
 package com.rtllabs.tddtictactoe.domain
 
+import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
@@ -7,6 +8,18 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class TicTacToeGameEngineTest {
+
+    @Test
+    fun gameShouldStartWithPlayerXUsingGameEngine() {
+        val game: GameEngine = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        val state=game.makeMove(0,0)
+
+        assertEquals(Player.X, state.board[0][0])
+    }
+
+
     @Test
     fun gameShouldStartWithEmptyBoard(){
         val game = TicTacToeGameEngine()
@@ -20,10 +33,10 @@ class TicTacToeGameEngineTest {
 
     @Test
     fun gameShouldStartWithPlayerX() {
-        val game = TicTacToeGameEngine()
+        val game: GameEngine = TicTacToeGameEngine()
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertEquals(Player.X, game.currentPlayer)
+        assertEquals(Player.X, game.snapshot().currentPlayer)
     }
 
     @Test

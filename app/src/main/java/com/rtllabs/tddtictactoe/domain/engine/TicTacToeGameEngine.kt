@@ -4,7 +4,7 @@ import com.rtllabs.tddtictactoe.domain.entity.Board
 import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 
-class TicTacToeGameEngine {
+class TicTacToeGameEngine: GameEngine {
     var board = Board()
         private set
     var currentPlayer = Player.X
@@ -14,11 +14,11 @@ class TicTacToeGameEngine {
     var isDraw = false
         private set
 
-    fun initBoard(boardSize: Int){
+    override fun initBoard(boardSize: Int){
         board.makeBoard(boardSize)
     }
 
-    fun makeMove(row: Int, column: Int): GameState {
+    override fun makeMove(row: Int, column: Int): GameState {
         if (isGameOver()) {
             return snapshot()
         }
@@ -98,7 +98,7 @@ class TicTacToeGameEngine {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
 
-    internal fun snapshot(): GameState {
+    override fun snapshot(): GameState {
         return GameState(
             board = board.getAllCells().map { it.toList() },
             currentPlayer = currentPlayer,
