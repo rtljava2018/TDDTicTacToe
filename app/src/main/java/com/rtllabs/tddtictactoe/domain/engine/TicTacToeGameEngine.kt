@@ -4,8 +4,9 @@ import androidx.annotation.VisibleForTesting
 import com.rtllabs.tddtictactoe.domain.entity.Board
 import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
+import javax.inject.Inject
 
-class TicTacToeGameEngine: GameEngine {
+class TicTacToeGameEngine @Inject constructor(): GameEngine {
 
     private lateinit var board: Board
     private var currentPlayer: Player = Player.X

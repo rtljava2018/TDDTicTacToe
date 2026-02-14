@@ -1,6 +1,8 @@
 package com.rtllabs.tddtictactoe.domain.usecase
 
+import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
+import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import org.junit.Assert.*
@@ -8,12 +10,11 @@ import org.junit.Before
 import org.junit.Test
 
 class MakeMoveUseCaseTest {
-    private lateinit var game: TicTacToeGameEngine
     private lateinit var useCase: MakeMoveUseCase
 
     @Before
     fun setup(){
-        game = TicTacToeGameEngine()
+        val game: GameEngine = TicTacToeGameEngine()
         useCase = MakeMoveUseCase(game)
     }
 
