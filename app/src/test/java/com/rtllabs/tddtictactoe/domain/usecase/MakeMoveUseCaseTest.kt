@@ -2,7 +2,6 @@ package com.rtllabs.tddtictactoe.domain.usecase
 
 import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
-import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import org.junit.Assert.*

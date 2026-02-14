@@ -1,7 +1,6 @@
 package com.rtllabs.tddtictactoe.domain.usecase
 
 import com.rtllabs.tddtictactoe.domain.engine.GameEngine
-import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.GameState
 import javax.inject.Inject
 
