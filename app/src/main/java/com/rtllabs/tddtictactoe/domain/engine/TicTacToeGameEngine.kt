@@ -14,8 +14,9 @@ class TicTacToeGameEngine: GameEngine {
     var isDraw = false
         private set
 
-    override fun initBoard(boardSize: Int){
+    override fun initBoard(boardSize: Int): GameState{
         board.makeBoard(boardSize)
+        return snapshot()
     }
 
     override fun makeMove(row: Int, column: Int): GameState {

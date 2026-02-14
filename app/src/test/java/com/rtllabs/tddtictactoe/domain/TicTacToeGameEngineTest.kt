@@ -4,10 +4,24 @@ import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig.TIC_TAC_TOE_SIZE
 import org.junit.Assert.*
 import org.junit.Test
 
 class TicTacToeGameEngineTest {
+
+    @Test
+    fun gameShouldStartWithInitializedBoard() {
+        val game: GameEngine = TicTacToeGameEngine()
+        val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        assertEquals(TIC_TAC_TOE_SIZE,state.board.size)
+        assertEquals(Player.X,state.currentPlayer)
+        assertFalse(state.isGameOver)
+        assertFalse(state.isDraw)
+        assertNull(state.winner)
+        assertTrue(state.board.flatten().all { it == null })
+    }
 
     @Test
     fun gameShouldStartWithPlayerXUsingGameEngine() {
@@ -26,7 +40,6 @@ class TicTacToeGameEngineTest {
         game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
         val board = game.board
 
-
         assertTrue(board.isEmpty())
 
     }
@@ -34,25 +47,25 @@ class TicTacToeGameEngineTest {
     @Test
     fun gameShouldStartWithPlayerX() {
         val game: GameEngine = TicTacToeGameEngine()
-        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+        val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertEquals(Player.X, game.snapshot().currentPlayer)
+        assertEquals(Player.X, state.currentPlayer)
     }
 
     @Test
     fun gameShouldStartWithNoWinner() {
         val game = TicTacToeGameEngine()
-        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+        val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertNull(game.winner)
+        assertNull(state.winner)
     }
 
     @Test
     fun gameShouldNotBeDrawInitially() {
         val game = TicTacToeGameEngine()
-        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+        val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertFalse(game.isDraw)
+        assertFalse(state.isDraw)
     }
 
     @Test

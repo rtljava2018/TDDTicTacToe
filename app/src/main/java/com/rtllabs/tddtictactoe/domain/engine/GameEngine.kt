@@ -4,6 +4,6 @@ import com.rtllabs.tddtictactoe.domain.entity.GameState
 
 interface GameEngine {
     fun makeMove(row: Int, column: Int): GameState
-    fun initBoard(boardSize: Int)
+    fun initBoard(boardSize: Int): GameState
     fun snapshot(): GameState
 }
