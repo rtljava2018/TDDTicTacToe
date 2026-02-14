@@ -1,24 +1,29 @@
 package com.rtllabs.tddtictactoe.domain.engine
 
+import androidx.annotation.VisibleForTesting
 import com.rtllabs.tddtictactoe.domain.entity.Board
 import com.rtllabs.tddtictactoe.domain.entity.GameState
 import com.rtllabs.tddtictactoe.domain.entity.Player
+import javax.inject.Inject
 
-class TicTacToeGameEngine {
-    var board = Board()
-        private set
-    var currentPlayer = Player.X
-        private set
-    var winner: Player? = null
-        private set
-    var isDraw = false
-        private set
+class TicTacToeGameEngine @Inject constructor(): GameEngine {
 
-    fun initBoard(boardSize: Int){
+    private lateinit var board: Board
+    private var currentPlayer: Player = Player.X
+    private var winner: Player? = null
+    private var isDraw: Boolean = false
+
+    override fun initBoard(boardSize: Int): GameState{
+        board= Board()
         board.makeBoard(boardSize)
+        currentPlayer= Player.X
+        winner=null
+        isDraw=false
+        return snapshot()
     }
 
-    fun makeMove(row: Int, column: Int): GameState {
+    override fun makeMove(row: Int, column: Int): GameState {
+        isBoardInitialized()
         if (isGameOver()) {
             return snapshot()
         }
@@ -29,6 +34,10 @@ class TicTacToeGameEngine {
             switchPlayer()
         }
         return snapshot()
+    }
+
+    private fun isBoardInitialized() {
+        if (!::board.isInitialized) throw IllegalStateException("Board is not initialized")
     }
 
     private fun evaluateGameState(row: Int, column: Int) {
@@ -42,6 +51,11 @@ class TicTacToeGameEngine {
         return winner != null || isDraw
     }
 
+    @VisibleForTesting
+    internal fun forceSetCell(row: Int, column: Int, player: Player){
+        isBoardInitialized()
+        board.setCells(row, column, player)
+    }
 
     private fun checkWinnerAfterMove(row: Int, column: Int): Player? {
         val cells = board.getAllCells()
@@ -98,7 +112,8 @@ class TicTacToeGameEngine {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
 
-    internal fun snapshot(): GameState {
+    override fun snapshot(): GameState {
+        isBoardInitialized()
         return GameState(
             board = board.getAllCells().map { it.toList() },
             currentPlayer = currentPlayer,
