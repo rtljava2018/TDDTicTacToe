@@ -1,10 +1,14 @@
 package com.rtllabs.tddtictactoe.domain.entity
 
+import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
+
 class Board {
 
     private lateinit var cells: MutableList<MutableList<Player?>>
+    private var boardSize: Int = TicTacToeConfig.TIC_TAC_TOE_SIZE
 
     fun makeBoard(boardSize: Int){
+        this.boardSize =boardSize
         cells = MutableList(boardSize){ MutableList(boardSize){ null } }
     }
 
@@ -28,6 +32,14 @@ class Board {
 
     fun getAllCells() : List<List<Player?>> {
         return cells.map { it.toList() }
+    }
+
+    fun clearBoard(){
+        for (row in 0 until boardSize) {
+            for (column in 0 until boardSize) {
+                cells[row][column] = null
+            }
+        }
     }
 
 }

@@ -112,6 +112,14 @@ class TicTacToeGameEngine @Inject constructor(): GameEngine {
         currentPlayer = if (currentPlayer == Player.X) Player.O else Player.X
     }
 
+    override fun resetBoard(): GameState {
+        board.clearBoard()
+        currentPlayer = Player.X
+        winner = null
+        isDraw = false
+        return snapshot()
+    }
+
     override fun snapshot(): GameState {
         isBoardInitialized()
         return GameState(

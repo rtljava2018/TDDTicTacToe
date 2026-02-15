@@ -58,4 +58,11 @@ class TicTacToeViewModel @Inject constructor(
 
     }
 
+    fun resetBoard(){
+        val gameState = makeMoveUseCase.resetBoard()
+        _uiState.value = GameUiState.GameInProgress(
+            board = gameState.board,
+            currentPlayer = gameState.currentPlayer)
+    }
+
 }

@@ -4,7 +4,6 @@ import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
-import com.rtllabs.tddtictactoe.utils.TicTacToeConfig.TIC_TAC_TOE_SIZE
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -15,7 +14,7 @@ class TicTacToeGameEngineTest {
         val game: GameEngine = TicTacToeGameEngine()
         val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertEquals(TIC_TAC_TOE_SIZE,state.board.size)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,state.board.size)
         assertEquals(Player.X,state.currentPlayer)
         assertFalse(state.isGameOver)
         assertFalse(state.isDraw)
@@ -445,6 +444,27 @@ class TicTacToeGameEngineTest {
         val winner=game.checkWinnerByAntiDiagonal(game.snapshot().board,Player.X)
 
         assertNull(winner)
+    }
+
+    @Test
+    fun resetBoardShouldStartWithInitializedBoard() {
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        for (index in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+            game.forceSetCell(index,index, Player.X)
+        }
+
+        val winner=game.checkWinnerByMainDiagonal(game.snapshot().board,Player.X)
+        val stateAfterReset=game.resetBoard()
+
+        assertEquals(Player.X,winner)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,stateAfterReset.board.size)
+        assertEquals(Player.X,stateAfterReset.currentPlayer)
+        assertFalse(stateAfterReset.isGameOver)
+        assertFalse(stateAfterReset.isDraw)
+        assertNull(stateAfterReset.winner)
+        assertTrue(stateAfterReset.board.flatten().all { it == null })
     }
 
 }

@@ -16,4 +16,8 @@ class MakeMoveUseCase @Inject constructor(
     operator fun invoke(row: Int, column: Int): GameState {
         return gameEngine.makeMove(row, column)
     }
+
+    fun resetBoard(): GameState {
+        return gameEngine.resetBoard()
+    }
 }

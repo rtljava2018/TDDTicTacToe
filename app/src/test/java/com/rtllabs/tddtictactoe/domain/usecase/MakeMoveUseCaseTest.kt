@@ -119,4 +119,23 @@ class MakeMoveUseCaseTest {
         assertTrue(gameState.isGameOver)
     }
 
+    @Test
+    fun resetBoardUseCaseShouldDetectNewBoard(){
+        var stateBeforeReset= useCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        for (row in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE) {
+            for (column in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE) {
+                stateBeforeReset= useCase(row, column)
+            }
+        }
+
+        val gameState=useCase.resetBoard()
+
+        assertEquals(Player.X, stateBeforeReset.winner)
+        assertFalse(gameState.isDraw)
+        assertNull(gameState.winner)
+        assertFalse(gameState.isGameOver)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE ,gameState.board.size)
+    }
+
 }

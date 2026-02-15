@@ -101,4 +101,21 @@ class BoardTest {
 
     }
 
+    @Test
+    fun clearBoardShouldClearAllCells() {
+        board.makeBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+        for (row in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+            for (column in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+                board.setCells(row,column, Player.X)
+            }
+        }
+        val isEmptyBeforeClear= board.isEmpty()
+        board.clearBoard()
+        val isEmptyAfterClear=board.isEmpty()
+
+        assertFalse(isEmptyBeforeClear)
+        assertTrue(isEmptyAfterClear)
+    }
+
+
 }
