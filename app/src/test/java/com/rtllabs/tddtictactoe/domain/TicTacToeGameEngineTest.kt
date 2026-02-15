@@ -447,4 +447,25 @@ class TicTacToeGameEngineTest {
         assertNull(winner)
     }
 
+    @Test
+    fun resetBoardShouldStartWithInitializedBoard() {
+        val game = TicTacToeGameEngine()
+        game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
+
+        for (index in 0 until TicTacToeConfig.TIC_TAC_TOE_SIZE){
+            game.forceSetCell(index,index, Player.X)
+        }
+
+        val winner=game.checkWinnerByMainDiagonal(game.snapshot().board,Player.X)
+        val stateAfterReset=game.resetBoard()
+
+        assertEquals(Player.X,winner)
+        assertEquals(TIC_TAC_TOE_SIZE,stateAfterReset.board.size)
+        assertEquals(Player.X,stateAfterReset.currentPlayer)
+        assertFalse(stateAfterReset.isGameOver)
+        assertFalse(stateAfterReset.isDraw)
+        assertNull(stateAfterReset.winner)
+        assertTrue(stateAfterReset.board.flatten().all { it == null })
+    }
+
 }

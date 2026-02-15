@@ -6,4 +6,5 @@ interface GameEngine {
     fun makeMove(row: Int, column: Int): GameState
     fun initBoard(boardSize: Int): GameState
     fun snapshot(): GameState
+    fun resetBoard(): GameState
 }
