@@ -18,47 +18,48 @@ import org.junit.Test
 class TicTacToeViewModelTest {
 
     private val makeMoveUseCase = mockk<MakeMoveUseCase>()
-    private lateinit var viewModel : TicTacToeViewModel
+    private lateinit var viewModel: TicTacToeViewModel
 
     @Before
-    fun setup(){
+    fun setup() {
         val fakeGameState = GameState(
             board = List(TicTacToeConfig.TIC_TAC_TOE_SIZE) { List(TicTacToeConfig.TIC_TAC_TOE_SIZE) { null } },
             currentPlayer = Player.X,
             winner = null,
             isDraw = false,
-            isGameOver = false )
+            isGameOver = false
+        )
         every { makeMoveUseCase.startNewGame(TicTacToeConfig.TIC_TAC_TOE_SIZE) } returns fakeGameState
         viewModel = TicTacToeViewModel(makeMoveUseCase)
     }
 
     @Test
-    fun ticTacToeViewModelInitShouldReturnInitGameUiState(){
+    fun ticTacToeViewModelInitShouldReturnInitGameUiState() {
 
-        val state=viewModel.uiState.value
+        val state = viewModel.uiState.value
 
         assertTrue(state is GameUiState.GameInProgress)
-        assertEquals(3,(state as GameUiState.GameInProgress).board.size)
+        assertEquals(3, (state as GameUiState.GameInProgress).board.size)
 
     }
 
     @Test
-    fun ticTacToeViewModelInitialStateShouldBeInProgress() = runTest{
+    fun ticTacToeViewModelInitialStateShouldBeInProgress() = runTest {
 
         viewModel.uiState.test {
 
             val initialState = awaitItem()
 
             assertTrue(initialState is GameUiState.GameInProgress)
-            val inProgress=initialState as GameUiState.GameInProgress
-            assertTrue(inProgress.board.flatten().size==9)
-            assertEquals(Player.X,inProgress.currentPlayer)
+            val inProgress = initialState as GameUiState.GameInProgress
+            assertTrue(inProgress.board.flatten().size == 9)
+            assertEquals(Player.X, inProgress.currentPlayer)
             cancelAndIgnoreRemainingEvents()
         }
     }
 
     @Test
-    fun ticTacToeViewModelOnCellClickedShouldEmitInProgressState() = runTest{
+    fun ticTacToeViewModelOnCellClickedShouldEmitInProgressState() = runTest {
 
         val fakeState = GameState(
             board = List(3) { List<Player?>(3) { null } },
@@ -68,22 +69,22 @@ class TicTacToeViewModelTest {
             isGameOver = false
         )
 
-        every { makeMoveUseCase.invoke(0,0) } returns fakeState
+        every { makeMoveUseCase.invoke(0, 0) } returns fakeState
 
         viewModel.uiState.test {
             skipItems(1) //skip initial state
-            viewModel.onCellClicked(0,0)
+            viewModel.onCellClicked(0, 0)
             val state = awaitItem()
 
             assertTrue(state is GameUiState.GameInProgress)
-            val inProgress=state as GameUiState.GameInProgress
-            assertEquals(Player.O,inProgress.currentPlayer)
+            val inProgress = state as GameUiState.GameInProgress
+            assertEquals(Player.O, inProgress.currentPlayer)
             cancelAndIgnoreRemainingEvents()
         }
     }
 
     @Test
-    fun ticTacToeViewModelOnCellClickedShouldEmitWonState() = runTest{
+    fun ticTacToeViewModelOnCellClickedShouldEmitWonState() = runTest {
 
         val fakeState = GameState(
             board = List(3) { List<Player?>(3) { null } },
@@ -93,22 +94,22 @@ class TicTacToeViewModelTest {
             isGameOver = true
         )
 
-        every { makeMoveUseCase.invoke(0,2) } returns fakeState
+        every { makeMoveUseCase.invoke(0, 2) } returns fakeState
 
         viewModel.uiState.test {
             skipItems(1) //skip initial state
-            viewModel.onCellClicked(0,2)
+            viewModel.onCellClicked(0, 2)
             val state = awaitItem()
 
             assertTrue(state is GameUiState.GameWon)
-            val won=state as GameUiState.GameWon
-            assertEquals(Player.X,won.winner)
+            val won = state as GameUiState.GameWon
+            assertEquals(Player.X, won.winner)
             cancelAndIgnoreRemainingEvents()
         }
     }
 
     @Test
-    fun ticTacToeViewModelOnCellClickedShouldEmitDrawState() = runTest{
+    fun ticTacToeViewModelOnCellClickedShouldEmitDrawState() = runTest {
 
         val fakeState = GameState(
             board = List(3) { List<Player?>(3) { null } },
@@ -118,11 +119,11 @@ class TicTacToeViewModelTest {
             isGameOver = true
         )
 
-        every { makeMoveUseCase.invoke(2,2) } returns fakeState
+        every { makeMoveUseCase.invoke(2, 2) } returns fakeState
 
         viewModel.uiState.test {
             skipItems(1) //skip initial state
-            viewModel.onCellClicked(2,2)
+            viewModel.onCellClicked(2, 2)
             val state = awaitItem()
 
             assertTrue(state is GameUiState.GameDraw)
@@ -130,7 +131,29 @@ class TicTacToeViewModelTest {
         }
     }
 
+    @Test
+    fun ticTacToeViewModelResetBoardShouldEmitFreshState() = runTest {
+        val fakeState = GameState(
+            board = List(TicTacToeConfig.TIC_TAC_TOE_SIZE) { List<Player?>(TicTacToeConfig.TIC_TAC_TOE_SIZE) { null } },
+            currentPlayer = Player.X,
+            winner = null,
+            isDraw = false,
+            isGameOver = false
+        )
 
+        every { makeMoveUseCase.resetBoard() } returns fakeState
+
+        viewModel.uiState.test {
+            viewModel.resetBoard()
+            val state = awaitItem()
+
+            assertTrue(state is GameUiState.GameInProgress)
+            val inProgress = state as GameUiState.GameInProgress
+            assertEquals(Player.X, inProgress.currentPlayer)
+            assertTrue(inProgress.board.flatten().all { it == null })
+            cancelAndIgnoreRemainingEvents()
+        }
+    }
 
 
 }

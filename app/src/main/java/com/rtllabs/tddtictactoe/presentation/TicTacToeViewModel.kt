@@ -7,6 +7,7 @@ import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -56,6 +57,13 @@ class TicTacToeViewModel @Inject constructor(
         }
 
 
+    }
+
+    fun resetBoard(){
+        val gameState = makeMoveUseCase.resetBoard()
+        _uiState.value = GameUiState.GameInProgress(
+            board = gameState.board,
+            currentPlayer = gameState.currentPlayer)
     }
 
 }
