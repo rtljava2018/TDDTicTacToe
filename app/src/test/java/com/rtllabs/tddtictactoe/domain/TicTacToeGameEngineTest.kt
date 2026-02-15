@@ -4,7 +4,6 @@ import com.rtllabs.tddtictactoe.domain.engine.GameEngine
 import com.rtllabs.tddtictactoe.domain.engine.TicTacToeGameEngine
 import com.rtllabs.tddtictactoe.domain.entity.Player
 import com.rtllabs.tddtictactoe.utils.TicTacToeConfig
-import com.rtllabs.tddtictactoe.utils.TicTacToeConfig.TIC_TAC_TOE_SIZE
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -15,7 +14,7 @@ class TicTacToeGameEngineTest {
         val game: GameEngine = TicTacToeGameEngine()
         val state=game.initBoard(TicTacToeConfig.TIC_TAC_TOE_SIZE)
 
-        assertEquals(TIC_TAC_TOE_SIZE,state.board.size)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,state.board.size)
         assertEquals(Player.X,state.currentPlayer)
         assertFalse(state.isGameOver)
         assertFalse(state.isDraw)
@@ -460,7 +459,7 @@ class TicTacToeGameEngineTest {
         val stateAfterReset=game.resetBoard()
 
         assertEquals(Player.X,winner)
-        assertEquals(TIC_TAC_TOE_SIZE,stateAfterReset.board.size)
+        assertEquals(TicTacToeConfig.TIC_TAC_TOE_SIZE,stateAfterReset.board.size)
         assertEquals(Player.X,stateAfterReset.currentPlayer)
         assertFalse(stateAfterReset.isGameOver)
         assertFalse(stateAfterReset.isDraw)
