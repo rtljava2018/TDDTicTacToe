@@ -1,8 +1,11 @@
 package com.rtllabs.tddtictactoe.GameScreen
 
+import androidx.compose.ui.test.assertCountEquals
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onFirst
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import com.rtllabs.tddtictactoe.domain.usecase.MakeMoveUseCase
@@ -93,5 +96,18 @@ class GameScreenTest {
         viewModel.onCellClicked(2,2) // X
 
         composeTestRule.onNodeWithText("It's a Draw!").assertExists()
+    }
+
+    @Test fun resetButtonClearsBoard() {
+        composeTestRule.setContent {
+            GameScreen(ticTacToeViewModel = viewModel)
+        }
+
+        composeTestRule.onAllNodesWithText("").onFirst().performClick()
+
+        composeTestRule.onNodeWithText("X").assertExists()
+
+        composeTestRule.onNodeWithTag("reset_button").performClick()
+        composeTestRule.onAllNodesWithText("").assertCountEquals(9)
     }
 }
